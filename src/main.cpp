@@ -128,7 +128,6 @@ int main()
             std::vector<unsigned char> deviceDriverVersion(deviceDriverVersionSize, 0);
             OCL_SAFE_CALL(clGetDeviceInfo(device, CL_DRIVER_VERSION, deviceDriverVersionSize, deviceDriverVersion.data(), nullptr));
             std::cout << "        Device driver version: " << deviceDriverVersion.data() << std::endl;
-
         }
     }
 
