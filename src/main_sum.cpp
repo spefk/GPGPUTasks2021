@@ -77,19 +77,23 @@ int main(int argc, char **argv)
 
         timer t;
         for (int i = 0; i < benchmarkingIters; ++i) {
+            t.stop(); // Не считаем запись в буффер
             unsigned int s = 0;
 
             gpu::gpu_mem_32u numbers_buff, res_gpu;
 
             numbers_buff.resizeN(n);
-            numbers_buff.writeN(as.data(), n);
+            numbers_buff.writeN(as.data(), globalWorkSize);
 
             res_gpu.resizeN(1);
             res_gpu.writeN(&s, 1);
 
+            t.start();
+
             kernel.exec(gpu::WorkSize(WORK_GROUP_SIZE, globalWorkSize),
                         numbers_buff,
                         res_gpu, n);
+
             res_gpu.readN(&gpu_res, 1);
 
             t.nextLap();
