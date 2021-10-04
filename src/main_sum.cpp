@@ -99,7 +99,6 @@ int main(int argc, char **argv)
             t.nextLap();
             EXPECT_THE_SAME(reference_sum, gpu_res, "GPU result should be consistent!");
         }
-
         std::cout << "GPU OMP: " << t.lapAvg() << "+-" << t.lapStd() << " s" << std::endl;
         std::cout << "GPU OMP: " << (n/1000.0/1000.0) / t.lapAvg() << " millions/s" << std::endl;
     }
